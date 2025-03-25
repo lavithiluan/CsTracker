@@ -19,17 +19,18 @@ public class PlayerController {
     private Logger log = LoggerFactory.getLogger(getClass());
     private List<Player> repository = new ArrayList<>();
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Player> index() {
         return repository;
     }
 
-    @PostMapping
+    @PostMapping("/cadastro")
     public ResponseEntity<Player> create(@RequestBody Player player) {
         log.info("Cadastrando jogador: " + player.getNickname());
         repository.add(player);
         return ResponseEntity.status(HttpStatus.CREATED).body(player);
     }
+
 
     @GetMapping("/{id}")
     public Player get(@PathVariable Long id) {
@@ -37,14 +38,14 @@ public class PlayerController {
         return getPlayer(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void destroy(@PathVariable Long id) {
         log.info("Apagando jogador com ID " + id);
         repository.remove(getPlayer(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public Player update(@PathVariable Long id, @RequestBody Player player) {
         log.info("Atualizando jogador " + id + " " + player);
         repository.remove(getPlayer(id));
