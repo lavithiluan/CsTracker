@@ -26,28 +26,27 @@ public class PlayerController {
 
     @PostMapping("/cadastro")
     public ResponseEntity<Player> create(@RequestBody Player player) {
-        log.info("Cadastrando jogador: " + player.getNickname());
+        log.info("Cadastrando jogador: {}", player.getNickname());
         repository.add(player);
         return ResponseEntity.status(HttpStatus.CREATED).body(player);
     }
 
-
     @GetMapping("/{id}")
     public Player get(@PathVariable Long id) {
-        log.info("Buscando jogador com ID " + id);
+        log.info("Buscando jogador com ID {}", id);
         return getPlayer(id);
     }
 
-    @DeleteMapping("/deletar")
+    @DeleteMapping("/deletar/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void destroy(@PathVariable Long id) {
-        log.info("Apagando jogador com ID " + id);
+        log.info("Apagando jogador com ID {}", id);
         repository.remove(getPlayer(id));
     }
 
     @PutMapping("/atualizar/{id}")
     public Player update(@PathVariable Long id, @RequestBody Player player) {
-        log.info("Atualizando jogador " + id + " " + player);
+        log.info("Atualizando jogador com ID {} e dados {}", id, player);
         repository.remove(getPlayer(id));
         player.setId(id);
         repository.add(player);
@@ -59,6 +58,6 @@ public class PlayerController {
             .stream()
             .filter(p -> p.getId().equals(id))
             .findFirst()
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Jogador não encontrado."));
     }
 }
