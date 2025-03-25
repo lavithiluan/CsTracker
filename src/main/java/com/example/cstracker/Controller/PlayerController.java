@@ -1,4 +1,4 @@
-package com.example.cstracker;
+package com.example.cstracker.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.cstracker.modelo.Player;
+import com.example.cstracker.Model.Player;
 
 @RestController
 @RequestMapping("/players")
