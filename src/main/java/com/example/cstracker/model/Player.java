@@ -5,14 +5,14 @@ import java.util.Random;
 public class Player {
     private Long id;
     private String nickname;
-    private int age;
+    private int idade;
     private String team;
 
     public Player(Long id, String nickname, int age, String team) {
         this.id = (id == null) ? Math.abs(new Random().nextLong()) : id;
-        this.nickname = nickname;
-        this.age = age;
-        this.team = team;
+        this.nickname = isNotNull(nickname);
+        this.idade = isNotNull(idade);
+        this.team = isNotNull(team);
     }
 
     public Long getId() {
@@ -21,10 +21,10 @@ public class Player {
 
     public String getNickname() {
         return nickname;
-    }
+    } 
 
-    public int getAge() {
-        return age;
+    public int getIdade() {
+        return idade;
     }
 
     public String getTeam() {
@@ -37,6 +37,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player [id=" + id + ", nickname=" + nickname + ", age=" + age + ", team=" + team + "]";
+        return String.format("Player [id=" + id + ", nickname=" + nickname + ", idade=" + idade + ", team=" + team + "]");
     }
 }
