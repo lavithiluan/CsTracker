@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.cstracker.model.Player;
 
 @RestController
-@RequestMapping("/players")
+@RequestMapping("/jogadores")
 public class PlayerController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
