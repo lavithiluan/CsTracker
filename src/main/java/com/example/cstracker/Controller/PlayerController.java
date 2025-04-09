@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.cstracker.model.Player;
 
+
 @RestController
 @RequestMapping("/jogadores")
 public class PlayerController {
@@ -24,6 +25,8 @@ public class PlayerController {
         return repository;
     }
 
+
+
     @PostMapping("/cadastro")
     public ResponseEntity<Player> create(@RequestBody Player player) {
         log.info("Cadastrando jogador: {}", player.getNickname());
@@ -31,11 +34,15 @@ public class PlayerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(player);
     }
 
+
+
     @GetMapping("/{id}")
     public Player get(@PathVariable Long id) {
         log.info("Buscando jogador com ID {}", id);
         return getPlayer(id);
     }
+
+
 
     @DeleteMapping("/deletar/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -44,6 +51,8 @@ public class PlayerController {
         repository.remove(getPlayer(id));
     }
 
+
+    
     @PutMapping("/atualizar/{id}")
     public Player update(@PathVariable Long id, @RequestBody Player player) {
         log.info("Atualizando jogador com ID {} e dados {}", id, player);

@@ -14,56 +14,53 @@ public class Player {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
-    public Player(Long id, String nickname, LocalDate dataNascimento, String time, char sexo) {
-        this.id = (id == null) ? Math.abs(new Random().nextLong()) : id;
+
+    public Player(Long id, String nickname, String time, char sexo, LocalDate dataNascimento) {
+        this.id = id;
         this.nickname = nickname;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
         this.time = time;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
+
     public String getNickname() {
         return nickname;
+    }
+
+
+    public String getTime() {
+        return time;
+    }
+
+
+    public char getSexo() {
+        return sexo;
+    }
+
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    public LocalDate getdataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setdataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
     public void setTime(String time) {
         this.time = time;
     }
 
-    public char getSexo() {
-        return sexo;
-    }
-
     public void setSexo(char sexo) {
         this.sexo = sexo;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {
@@ -76,8 +73,8 @@ public class Player {
                         ", nickname=" + nickname + 
                         ", dataNascimento=" + dataNascimento +
                         ", sexo=" + sexo +	
-                        ", time=" + time
-                + "]";
+                        ", time=" + time + 
+                        "]";
     }
 
 }
