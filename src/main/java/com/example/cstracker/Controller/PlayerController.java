@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.cstracker.Model.Player;
+import com.example.cstracker.model.Player;
 
 @RestController
 @RequestMapping("/players")

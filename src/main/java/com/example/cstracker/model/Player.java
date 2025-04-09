@@ -1,4 +1,4 @@
-package com.example.cstracker.Model;
+package com.example.cstracker.model;
 
 import java.security.InvalidParameterException;
 
