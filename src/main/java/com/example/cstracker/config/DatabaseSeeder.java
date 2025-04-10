@@ -28,35 +28,22 @@ public class DatabaseSeeder {
 
     @PostConstruct
     public void init() {
-        var p1 = new Player(null, "ZywOo", "Vitality", 'M', LocalDate.of(2000, 11, 9));
-        var p2 = new Player(null, "s1mple", "NAVI", 'M', LocalDate.of(1997, 10, 2));
+        // Cadastra jogadores
+        var players = List.of(
+                new Player(null, "ZywOo", "Vitality", 'M', LocalDate.of(2000, 11, 9)),
+                new Player(null, "s1mple", "NAVI", 'M', LocalDate.of(1997, 10, 2))
+        );
+        playerRepository.saveAll(players);
 
-        playerRepository.saveAll(List.of(p1, p2));
-
-        var partida = new Partida();
+        // Cadastra partida
+        var partida = new Partida(null, new Date(), "Mirage", null);
         partida.setData(new Date());
         partida.setMapa("Mirage");
-
         partidaRepository.save(partida);
 
-        var stat1 = new Statistics();
-        stat1.setPartida(partida);
-        stat1.setPlayer(p1);
-        stat1.setKills(25);
-        stat1.setDeaths(10);
-        stat1.setAssists(5);
-        stat1.setHeadshots(10);
-        stat1.setAccuracy(0.65);
-
-        var stat2 = new Statistics();
-        stat2.setPartida(partida);
-        stat2.setPlayer(p2);
-        stat2.setKills(30);
-        stat2.setDeaths(12);
-        stat2.setAssists(4);
-        stat2.setHeadshots(15);
-        stat2.setAccuracy(0.70);
-
+        // Cadastra estatísticas
+        var stat1 = new Statistics(null, players.get(0), partida, 25, 10, 5, 10, 0.65);
+        var stat2 = new Statistics(null, players.get(1), partida, 30, 12, 4, 15, 0.70);
         statisticsRepository.saveAll(List.of(stat1, stat2));
     }
 }
