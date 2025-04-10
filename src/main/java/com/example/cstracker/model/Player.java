@@ -1,7 +1,6 @@
 package com.example.cstracker.model;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
