@@ -31,7 +31,6 @@ public class PlayerController {
             estatistica.setPlayer(player);
             estatisticaRepository.save(estatistica);
         }
-
         return ResponseEntity.status(HttpStatus.CREATED).body(player);
     }
 
