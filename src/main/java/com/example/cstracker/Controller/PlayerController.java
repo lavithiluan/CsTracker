@@ -1,57 +1,112 @@
-package com.example.cstracker.Controller;
+package com.example.cstracker.controller;
 
+import com.example.cstracker.model.Estatistica;
 import com.example.cstracker.model.Player;
+import com.example.cstracker.repository.EstatisticaRepository;
 import com.example.cstracker.repository.PlayerRepository;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/jogadores")
+@RequestMapping("/players")
 public class PlayerController {
 
-    Logger log = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private PlayerRepository playerRepository;
 
     @Autowired
-    PlayerRepository repository;
+    private EstatisticaRepository estatisticaRepository;
 
-    @GetMapping("/all")
-    public List<Player> index() {
-        return repository.findAll();
-    }
 
+    // Cadastrar um jogador com suas estatísticas
     @PostMapping("/cadastro")
-    public ResponseEntity<Player> create(@RequestBody Player player) {
-        log.info("Cadastrando jogador: {}", player.getNickname());
-        Player savedPlayer = repository.save(player);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedPlayer);
+    public ResponseEntity<Player> cadastrarPlayer(@RequestBody Player player) {
+        playerRepository.save(player);
+
+        for (Estatistica estatistica : player.getEstatisticas()) {
+            estatistica.setPlayer(player);
+            estatisticaRepository.save(estatistica);
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(player);
     }
 
+
+    // Obter todos os jogadores
+    @GetMapping("/all")
+    public List<Player> listarPlayers() {
+        return playerRepository.findAll();
+    }
+
+
+    // Obter um jogador específico e suas estatísticas
     @GetMapping("/{id}")
-    public Player findPlayerById(@PathVariable Long id) {
-        log.info("Buscando jogador com ID {}", id);
-        return repository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Jogador não encontrado"));
+    public ResponseEntity<Player> obterPlayer(@PathVariable Long id) {
+        return playerRepository.findById(id)
+                .map(player -> ResponseEntity.ok(player))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @DeleteMapping("/deletar/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void destroy(@PathVariable Long id) {
-        log.info("Apagando jogador com ID {}", id);
-        repository.delete(findPlayerById(id));
+
+    // Obter as estatísticas de um jogador específico
+    @GetMapping("/{id}/estatisticas")
+    public ResponseEntity<List<Estatistica>> obterEstatisticas(@PathVariable Long id) {
+        Player player = playerRepository.findById(id).orElse(null);
+        if (player != null) {
+            return ResponseEntity.ok(player.getEstatisticas());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
-    @PutMapping("/atualizar/{id}")
-    public Player update(@PathVariable Long id, @RequestBody Player player) {
-        log.info("Atualizando jogador com ID {}", id);
-        player.setId(id);
-        return repository.save(player);
+
+    // Atualizar informações de um jogador
+    @PutMapping("/{id}")
+    public ResponseEntity<Player> atualizarPlayer(@PathVariable Long id, @RequestBody Player playerAtualizado) {
+        return playerRepository.findById(id)
+                .map(player -> {
+                    player.setNickname(playerAtualizado.getNickname());
+                    player.setSexo(playerAtualizado.getSexo());
+                    player.setTime(playerAtualizado.getTime());
+                    player.setDataNascimento(playerAtualizado.getDataNascimento());
+                    playerRepository.save(player);
+                    return ResponseEntity.ok(player);
+                })
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+
+    // Atualizar estatísticas de um jogador
+    @PutMapping("/estatisticas/{id}")
+    public ResponseEntity<Estatistica> atualizarEstatisticas(@PathVariable Long id,
+            @RequestBody Estatistica estatisticaAtualizada) {
+        return estatisticaRepository.findById(id)
+                .map(estatistica -> {
+                    estatistica.setKills(estatisticaAtualizada.getKills());
+                    estatistica.setDeaths(estatisticaAtualizada.getDeaths());
+                    estatistica.setAssists(estatisticaAtualizada.getAssists());
+                    estatistica.setHeadshots(estatisticaAtualizada.getHeadshots());
+                    estatistica.setAccuracy(estatisticaAtualizada.getAccuracy());
+                    estatisticaRepository.save(estatistica);
+                    return ResponseEntity.ok(estatistica);
+                })
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    
+    // Deletar um jogador e suas estatísticas
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletarPlayer(@PathVariable Long id) {
+        return playerRepository.findById(id)
+                .map(player -> {
+                    estatisticaRepository.deleteAll(player.getEstatisticas());
+                    playerRepository.delete(player);
+                    return ResponseEntity.noContent().build();
+                })
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }
