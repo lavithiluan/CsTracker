@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import com.example.cstracker.model.Player;
-import com.example.cstracker.repository.EstatisticaRepository;
 import com.example.cstracker.repository.PlayerRepository;
 import jakarta.annotation.PostConstruct;
 
