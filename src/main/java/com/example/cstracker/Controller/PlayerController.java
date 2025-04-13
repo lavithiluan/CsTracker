@@ -1,4 +1,4 @@
-package com.example.cstracker.controller;
+package com.example.cstracker.Controller;
 
 import com.example.cstracker.model.Estatistica;
 import com.example.cstracker.model.Player;
