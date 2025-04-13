@@ -1,47 +1,16 @@
 type: collection.insomnia.rest/5.0
 name: My Collection
 meta:
-  id: wrk_0dd8c5f5daff4d7596c82d7554562d02
-  created: 1742944771533
-  modified: 1742944771533
+  id: wrk_75c18cd852b34b659b7202e382559448
+  created: 1744542534310
+  modified: 1744542534310
 collection:
-  - url: http://localhost:8080/players/cadastro
-    name: Criar Perfil
-    meta:
-      id: req_073163c4e0f64f419d593efc2cb84347
-      created: 1742185467195
-      modified: 1742946399158
-      isPrivate: false
-      sortKey: -1742185467195
-    method: POST
-    body:
-      mimeType: application/json
-      text: |-
-        {
-        	"id": 1,
-        	"nickname": "Lavithiluan",
-        	"idade": "20",
-        	"team": "OCTO"
-        }
-    headers:
-      - name: Content-Type
-        value: application/json
-      - name: User-Agent
-        value: insomnia/10.3.1
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
   - url: http://localhost:8080/players/all
-    name: Todas os Perfil Registrados
+    name: Todas os Jogadores Registrados
     meta:
-      id: req_1aa3e6eee71847a18ab05508792f461d
+      id: req_7f1185fd04614d9487ebb703b222d5ba
       created: 1742262436406
-      modified: 1742945407632
+      modified: 1744554103173
       isPrivate: false
       sortKey: -1742262436406
     method: GET
@@ -57,11 +26,11 @@ collection:
         store: true
       rebuildPath: true
   - url: http://localhost:8080/players/1
-    name: Conta Por ID
+    name: Jogador Por ID
     meta:
-      id: req_40c74747dfb34c40a6c05e853afe9395
+      id: req_090188d2f9b1464c8fba4bec4e5636ac
       created: 1742262533245
-      modified: 1742946407845
+      modified: 1744552688580
       isPrivate: false
       sortKey: -1742262533245
     method: GET
@@ -76,12 +45,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://localhost:8080/players/deletar/1
-    name: Deletar Perfil
+  - url: http://localhost:8080/players/1
+    name: Deletar Jogador
     meta:
-      id: req_8195d6a519d84a7fb052b1257feab348
+      id: req_3f7cfa0d57174fba9d02b6755cf06efb
       created: 1742340488531
-      modified: 1742946434100
+      modified: 1744554129219
       isPrivate: false
       sortKey: -1742340488531
     method: DELETE
@@ -96,22 +65,124 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://localhost:8080/players/atualizar/1
-    name: Atualizar Perfil
+  - url: http://localhost:8080/players/1
+    name: Atualizar Jogador
     meta:
-      id: req_b411223bb45c4109b1c7d39dc310fc8b
+      id: req_5a38d694d9cf4df48c410a316967e8ea
       created: 1742945347742
-      modified: 1742946419252
+      modified: 1744562307571
       isPrivate: false
       sortKey: -1742301510888
     method: PUT
     body:
       mimeType: application/json
-      text: |-
+      text: |
         {
-        	"nickname": "Lavithiluan",
-        	"idade": "25",
-        	"team": "Furia"
+          "nickname": "Gabriel Toledo",
+          "time": "Furia",
+          "sexo": "M",
+          "dataNascimento": "1991-06-30",
+          "estatisticas": [
+            {
+              "kills": 35,
+              "deaths": 10,
+              "assists": 8,
+              "headshots": 20,
+              "accuracy": 85.0
+            }
+          ]
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/players/cadastro
+    name: Criar Jogador
+    meta:
+      id: req_00cebcb011114c16a08385c39b41179b
+      created: 1744550489149
+      modified: 1744559943474
+      isPrivate: false
+      sortKey: -1742185466995
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "nickname": "Fallen",
+          "time": "Imperial",
+          "sexo": "M",
+          "dataNascimento": "1991-06-30",
+          "estatisticas": [
+            {
+              "kills": 28,
+              "deaths": 12,
+              "assists": 7,
+              "headshots": 14,
+              "accuracy": 76.5
+            }
+          ]
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.3.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/players/1/estatisticas
+    name: Estatísticas do jogador por ID
+    meta:
+      id: req_ced46ed8fa9d4e31ae89337e0df4dd6f
+      created: 1744550825424
+      modified: 1744552845143
+      isPrivate: false
+      sortKey: -1742262484825.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/10.3.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/players/estatisticas/1
+    name: Atualizar Estatística do Jogador
+    meta:
+      id: req_9631cd79ac0e4b59a008fd434a34d244
+      created: 1744551700491
+      modified: 1744554031215
+      isPrivate: false
+      sortKey: -1742282022066.5
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "kills": 99,
+          "deaths": 10,
+          "assists": 9,
+          "headshots": 25,
+          "accuracy": 88.5
         }
     headers:
       - name: Content-Type
@@ -129,13 +200,13 @@ collection:
 cookieJar:
   name: Default Jar
   meta:
-    id: jar_1375159605d34bec8e8eedaa74f483fc
+    id: jar_a9d72e507f5440aea07a87abcb95f800
     created: 1742182763131
     modified: 1742182763131
 environments:
   name: Base Environment
   meta:
-    id: env_09526d84bc84416ea1b5593f2a70f86e
+    id: env_c4ddbc9a01fb44079679b02b4bf28f1f
     created: 1727916721320
     modified: 1742182763090
     isPrivate: false
