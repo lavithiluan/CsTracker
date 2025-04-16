@@ -12,6 +12,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +42,7 @@ public class Player {
     @NotBlank(message = "O campo sexo é obrigatório")
     private char sexo;
 
-    @PastorPresent(message = "A data de nascimento deve ser uma data passada")
+    @PastOrPresent(message = "A data de nascimento deve ser uma data passada")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
 
