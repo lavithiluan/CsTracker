@@ -1,4 +1,4 @@
-package com.example.cstracker.Controller;
+package com.example.cstracker.controller;
 
 import java.util.List;
 
