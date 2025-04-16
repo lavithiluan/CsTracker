@@ -24,6 +24,7 @@ public class PlayerController {
 
     // Cadastrar um jogador com suas estatísticas
     @PostMapping("/cadastro")
+    @Cacheable("players")
     public ResponseEntity<Player> cadastrarPlayer(@RequestBody Player player) {
         playerRepository.save(player);
 

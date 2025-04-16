@@ -29,10 +29,17 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O campo nome é obrigatório")
+    @Size(min = 3, max = 50, message = "O campo nome deve ter entre 3 e 50 caracteres")
     private String nickname;
+
+    @NotBlank(message = "O campo time é obrigatório")
     private String time;
+
+    @NotBlank(message = "O campo sexo é obrigatório")
     private char sexo;
 
+    @PastorPresent(message = "A data de nascimento deve ser uma data passada")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
 
