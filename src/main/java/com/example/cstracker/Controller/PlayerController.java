@@ -1,9 +1,15 @@
-package com.example.cstracker.controller;
+package com.example.cstracker.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +20,6 @@ import com.example.cstracker.repository.EstatisticaRepository;
 import com.example.cstracker.repository.PlayerRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
-
 
 @RestController
 @RequestMapping("/players")
@@ -108,5 +113,31 @@ public class PlayerController {
                     return ResponseEntity.noContent().build();
                 })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    // Filtrar jogadores por nickname ou data de nascimento
+    @GetMapping("/search")
+    public Page<Player> buscarPlayers(
+            @RequestParam(required = false) String nickname,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending());
+
+        if (nickname != null) {
+            return playerRepository.findByNicknameContainingIgnoreCase(nickname, pageable);
+        }
+
+        if (dataInicio != null && dataFim != null) {
+            return playerRepository.findByDataNascimentoBetween(dataInicio, dataFim, pageable);
+        }
+
+        return playerRepository.findAll(pageable);
     }
 }
