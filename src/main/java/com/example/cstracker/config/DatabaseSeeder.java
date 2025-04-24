@@ -19,11 +19,11 @@ public class DatabaseSeeder {
     @PostConstruct
     public void init() {
         var player = List.of(
-            Player.builder().nickname("Player 1").time("Time A").sexo('M').dataNascimento(LocalDate.parse("2000-01-01")).build(),
-            Player.builder().nickname("Player 2").time("Time B").sexo('F').dataNascimento(LocalDate.parse("1995-05-15")).build(),
-            Player.builder().nickname("Player 3").time("Time C").sexo('M').dataNascimento(LocalDate.parse("1998-10-20")).build(),
-            Player.builder().nickname("Player 4").time("Time D").sexo('F').dataNascimento(LocalDate.parse("1992-03-30")).build(),
-            Player.builder().nickname("Player 5").time("Time E").sexo('M').dataNascimento(LocalDate.parse("1990-07-25")).build());
+            Player.builder().nickname("Fallen").time("Furia").sexo('M').dataNascimento(LocalDate.parse("2000-01-01")).build(),
+            Player.builder().nickname("Fer").time("Imperial").sexo('M').dataNascimento(LocalDate.parse("1995-05-15")).build(),
+            Player.builder().nickname("Coldzera").time("Red Canids").sexo('M').dataNascimento(LocalDate.parse("1998-10-20")).build(),
+            Player.builder().nickname("Fnx").time("Last Dance").sexo('M').dataNascimento(LocalDate.parse("1992-03-30")).build(),
+            Player.builder().nickname("Taco").time("Mibr").sexo('M').dataNascimento(LocalDate.parse("1990-07-25")).build());
         
         playerRepository.saveAll(player);
     }
