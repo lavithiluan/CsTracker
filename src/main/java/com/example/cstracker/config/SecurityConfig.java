@@ -16,7 +16,7 @@ package com.example.cstracker.config;
      SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
          return http
                  .authorizeHttpRequests(auth -> auth
-                         .requestMatchers("/transactions/**").hasRole("ADMIN")
+                         .requestMatchers("/players/**").hasRole("ADMIN")
                          .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
                          .anyRequest().authenticated())
                  .httpBasic(Customizer.withDefaults())

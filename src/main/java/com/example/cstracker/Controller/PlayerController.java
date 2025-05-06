@@ -1,4 +1,4 @@
-package com.example.cstracker.controller;
+package com.example.cstracker.Controller;
 
 import java.time.LocalDate;
 import java.util.List;
