@@ -1,4 +1,4 @@
-package com.example.cstracker.Controller;
+package com.example.cstracker.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;

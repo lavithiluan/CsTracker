@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ValidationHandler {
 
-    record ValidationError(String field, String message) {
+    record ValidationError(String field, String message){
         public ValidationError(FieldError fieldError) {
             this(fieldError.getField(), fieldError.getDefaultMessage());
         }
@@ -20,10 +20,10 @@ public class ValidationHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<ValidationError> handle(MethodArgumentNotValidException e) {
+    public List<ValidationError> handle(MethodArgumentNotValidException e){
         return e.getFieldErrors()
                 .stream()
-                .map(ValidationError::new) 
+                .map(ValidationError::new)
                 .toList();
     }
 }

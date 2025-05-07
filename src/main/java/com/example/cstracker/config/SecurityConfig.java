@@ -28,7 +28,7 @@ package com.example.cstracker.config;
      // UserDetailsService userDetailsService(){
      // return new InMemoryUserDetailsManager(List.of(
      // User
-     // .withUsername("joao")
+     // .withUsername("thiago")
      // .password("$2a$12$bTQhrOKvy8u.41Z6MCtAWO324bULDah.LrXdFZ/aWkS9gY0UYRS0G")
      // .roles("ADMIN")
      // .build(),

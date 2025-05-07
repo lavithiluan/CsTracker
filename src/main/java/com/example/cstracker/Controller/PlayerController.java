@@ -1,14 +1,17 @@
-package com.example.cstracker.Controller;
+package com.example.cstracker.controller;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import com.example.cstracker.model.PlayerFilter;
+import com.example.cstracker.specification.PlayerSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -116,28 +119,26 @@ public class PlayerController {
     }
 
     // Filtrar jogadores por nickname ou data de nascimento
-    @GetMapping("/search")
-    public Page<Player> buscarPlayers(
+    @GetMapping("/search/spec")
+    public Page<Player> buscarComFiltros(
             @RequestParam(required = false) String nickname,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
+            @RequestParam(required = false) String time,
+            @RequestParam(required = false) Character sexo,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate nascimentoInicio,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate nascimentoFim,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
+
         Pageable pageable = PageRequest.of(
                 page,
                 size,
                 sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending());
 
-        if (nickname != null) {
-            return playerRepository.findByNicknameContainingIgnoreCase(nickname, pageable);
-        }
+        PlayerFilter filter = new PlayerFilter(nickname, time, sexo, nascimentoInicio, nascimentoFim);
+        Specification<Player> spec = PlayerSpecification.withFilters(filter);
 
-        if (dataInicio != null && dataFim != null) {
-            return playerRepository.findByDataNascimentoBetween(dataInicio, dataFim, pageable);
-        }
-
-        return playerRepository.findAll(pageable);
+        return playerRepository.findAll(spec, pageable);
     }
 }
