@@ -67,20 +67,5 @@ public class DatabaseSeeder {
         }
 
         playerRepository.saveAll(playersWithStats);
-
-        // Criação de usuários
-        userRepository.saveAll(List.of(
-                User.builder()
-                        .email("thiago@fiap.com.br")
-                        .password(passwordEncoder.encode("12345"))
-                        .role(UserRole.ADMIN)
-                        .build(),
-
-                User.builder()
-                        .email("maria@fiap.com.br")
-                        .password(passwordEncoder.encode("12345"))
-                        .role(UserRole.USER)
-                        .build()
-        ));
     }
 }

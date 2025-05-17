@@ -30,11 +30,11 @@ public class AuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        if (!header.startsWith("Bearer ")) {
+        if(!header.startsWith("Bearer ")){
             response.setStatus(401);
-            response.getWriter().write("""
-                        {"message": "Header deve iniciar com Bearer"}
-                    """);
+            response.getWriter().write(""" 
+                {"message": "Header deve iniciar com Bearer"} 
+            """);
             return;
         }
 

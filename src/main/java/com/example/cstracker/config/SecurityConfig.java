@@ -23,23 +23,6 @@ package com.example.cstracker.config;
                  .csrf(csrf -> csrf.disable())
                  .build();
      }
- 
-     // @Bean
-     // UserDetailsService userDetailsService(){
-     // return new InMemoryUserDetailsManager(List.of(
-     // User
-     // .withUsername("thiago")
-     // .password("$2a$12$bTQhrOKvy8u.41Z6MCtAWO324bULDah.LrXdFZ/aWkS9gY0UYRS0G")
-     // .roles("ADMIN")
-     // .build(),
-     // User
-     // .withUsername("maria")
-     // .password("$2a$12$nuQqQOe3hA5jWi4bCWQ8bedArKPWo45Mvv1n2kulO/r7AjMwJHxvm")
-     // .roles("USER")
-     // .build()
-     // ));
-     // }
- 
      @Bean
      PasswordEncoder passwordEncoder() {
          return new BCryptPasswordEncoder();

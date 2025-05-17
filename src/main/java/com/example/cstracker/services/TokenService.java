@@ -35,7 +35,7 @@ public class TokenService {
         var jwtVerified = JWT.require(algorithm).build().verify(jwt);
         return User.builder()
                     .id(Long.valueOf(jwtVerified.getSubject()))
-                    .email(jwtVerified.getClaim("email").toString())
+                    .email(jwtVerified.getClaim("email").asString())
                     .role(UserRole.ADMIN)
                     .build();
 
