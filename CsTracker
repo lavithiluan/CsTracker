@@ -1,0 +1,307 @@
+type: collection.insomnia.rest/5.0
+name: CsTracker
+meta:
+  id: wrk_75c18cd852b34b659b7202e382559448
+  created: 1744542534310
+  modified: 1747503906735
+collection:
+  - name: CsTracker
+    meta:
+      id: fld_8a5089f1704c439da13bc5ac3765d65c
+      created: 1747271850598
+      modified: 1747504050105
+      sortKey: -1747504048148
+    children:
+      - name: User
+        meta:
+          id: fld_40f92366b4d04124a172d0389f426c1b
+          created: 1747504048048
+          modified: 1747534705273
+          sortKey: -1747271858159
+        children:
+          - url: http://localhost:8080/login
+            name: Login
+            meta:
+              id: req_45026114dd3a4c49a74709da45f403ba
+              created: 1747504057932
+              modified: 1747534709296
+              isPrivate: false
+              sortKey: -1747534708392
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"username": "thiago@mail.com.br",
+                	"password": "1234"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+                id: pair_e5b53085364242c2a3484ecccc52c2f5
+              - name: User-Agent
+                value: insomnia/11.0.2
+                id: pair_a96f248369934310932cacb224cb912e
+            authentication:
+              type: none
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8080/users
+            name: UserPost
+            meta:
+              id: req_c844d9f5ba3747858ce9400f12fdf59c
+              created: 1747504072447
+              modified: 1747534708343
+              isPrivate: false
+              sortKey: -1747534708292
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"email": "thiago@mail.com.br",
+                	"password": "1234",
+                	"role": "ADMIN"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            authentication:
+              type: basic
+              useISO88591: false
+              disabled: true
+              username: thiago@fiap.com.br
+              password: $2a$10$mN/iyeEAA7U5SbB.zyF1keDZ8JZrI.vLspLd.m4mEkrHFxvgCf7.i
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - url: http://localhost:8080/players/all
+        name: Todas os Jogadores Registrados
+        meta:
+          id: req_7f1185fd04614d9487ebb703b222d5ba
+          created: 1742262436406
+          modified: 1747271862836
+          isPrivate: false
+          sortKey: -1747271857934
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/players/6
+        name: Jogador Por ID
+        meta:
+          id: req_090188d2f9b1464c8fba4bec4e5636ac
+          created: 1742262533245
+          modified: 1747271871355
+          isPrivate: false
+          sortKey: -1747271857734
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/players/1
+        name: Deletar Jogador
+        meta:
+          id: req_3f7cfa0d57174fba9d02b6755cf06efb
+          created: 1742340488531
+          modified: 1747271878027
+          isPrivate: false
+          sortKey: -1747271857434
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/8.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/players/1
+        name: Atualizar Jogador
+        meta:
+          id: req_5a38d694d9cf4df48c410a316967e8ea
+          created: 1742945347742
+          modified: 1747271876043
+          isPrivate: false
+          sortKey: -1747271857534
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "nickname": "Gabriel Toledo",
+              "time": "Furia",
+              "sexo": "M",
+              "dataNascimento": "1991-06-30",
+              "estatisticas": [
+                {
+                  "kills": 35,
+                  "deaths": 10,
+                  "assists": 8,
+                  "headshots": 20,
+                  "accuracy": 85.0
+                }
+              ]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/players/cadastro
+        name: Criar Jogador
+        meta:
+          id: req_00cebcb011114c16a08385c39b41179b
+          created: 1744550489149
+          modified: 1747507890694
+          isPrivate: false
+          sortKey: -1747271858034
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "nickname": "Fallen",
+              "time": "Imperial",
+              "sexo": "M",
+              "dataNascimento": "1991-06-30",
+              "estatisticas": [
+                {
+                  "kills": 28,
+                  "deaths": 12,
+                  "assists": 7,
+                  "headshots": 14,
+                  "accuracy": 76.5
+                }
+              ]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/10.3.1
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/players/1/estatisticas
+        name: Estatísticas do jogador por ID
+        meta:
+          id: req_ced46ed8fa9d4e31ae89337e0df4dd6f
+          created: 1744550825424
+          modified: 1747271868608
+          isPrivate: false
+          sortKey: -1747271857834
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/10.3.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/players/estatisticas/1
+        name: Atualizar Estatística do Jogador
+        meta:
+          id: req_9631cd79ac0e4b59a008fd434a34d244
+          created: 1744551700491
+          modified: 1747271873972
+          isPrivate: false
+          sortKey: -1747271857634
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "kills": 99,
+              "deaths": 10,
+              "assists": 9,
+              "headshots": 25,
+              "accuracy": 88.5
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_a9d72e507f5440aea07a87abcb95f800
+    created: 1742182763131
+    modified: 1747504673585
+  cookies:
+    - key: JSESSIONID
+      value: BF4B0E5E17AAC438991708C74C19E1F4
+      domain: localhost
+      path: /
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-05-15T01:20:17.925Z
+      lastAccessed: 2025-05-17T17:57:53.585Z
+      id: edc9be99-4e43-457e-9e2c-656ab18de987
+environments:
+  name: Base Environment
+  meta:
+    id: env_c4ddbc9a01fb44079679b02b4bf28f1f
+    created: 1727916721320
+    modified: 1742182763090
+    isPrivate: false
